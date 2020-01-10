@@ -1,0 +1,27 @@
+commit cf8ab7d8e76ed70c182c7588cfe1ebbce8e5174b
+Author: Peng Wu <alexepico@gmail.com>
+Date:   Tue Oct 8 10:45:35 2013 +0800
+
+    remove pyxdg depends
+
+diff --git a/setup/main2.py b/setup/main2.py
+index 2d7d412..f7dfcce 100644
+--- a/setup/main2.py
++++ b/setup/main2.py
+@@ -30,7 +30,6 @@ import sys
+ from gi.repository import GLib
+ from gi.repository import Gtk
+ from gi.repository import IBus
+-from xdg import BaseDirectory
+ 
+ import config
+ from dicttreeview import DictionaryTreeView
+@@ -373,7 +372,7 @@ class PreferencesDialog:
+ 
+     def __edit_lua_cb(self, widget):
+         import shutil
+-        path = os.path.join(BaseDirectory.xdg_config_home, "ibus", "libpinyin")
++        path = os.path.join(GLib.get_user_config_dir(), "ibus", "libpinyin")
+         os.path.exists(path) or os.makedirs(path)
+         path = os.path.join(path, "user.lua")
+         if not os.path.exists(path):

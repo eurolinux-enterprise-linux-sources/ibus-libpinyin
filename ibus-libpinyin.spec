@@ -2,7 +2,7 @@
 
 Name:       ibus-libpinyin
 Version:    1.6.91
-Release:    1%{?dist}
+Release:    4%{?dist}
 Summary:    Intelligent Pinyin engine based on libpinyin for IBus
 License:    GPLv2+
 Group:      System Environment/Libraries
@@ -11,6 +11,8 @@ Source0:    http://downloads.sourceforge.net/libpinyin/ibus-libpinyin/%{name}-%{
 %if %snapshot
 Patch0:     ibus-libpinyin-1.7.x-head.patch
 %endif
+Patch1:     ibus-libpinyin-update-gnome-shell-indicatior.patch
+Patch2:     ibus-libpinyin-drop-xdg-depends.patch
 
 BuildRequires:  gettext-devel
 BuildRequires:  intltool
@@ -42,6 +44,9 @@ input method based on libpinyin for IBus.
 %if %snapshot
 %patch0 -p1 -b .head
 %endif
+%patch1 -p1 -b .indicator
+%patch2 -p1 -b .xdg
+
 
 %build
 %configure --disable-static \
@@ -78,6 +83,17 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 %{_datadir}/ibus/component/*
 
 %changelog
+* Wed Feb 26 2014 Peng Wu <pwu@redhat.com> - 1.6.91-4
+- Resolves: rhbz#1068338, rhbz#1068448
+- Add patch ibus-libpinyin-update-gnome-shell-indicatior.patch
+- Add patch ibus-libpinyin-drop-xdg-depends.patch
+
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.6.91-3
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.6.91-2
+- Mass rebuild 2013-12-27
+
 * Sun Apr 28 2013 Peng Wu <pwu@redhat.com> - 1.6.91-1
 - Update to 1.6.91
 
